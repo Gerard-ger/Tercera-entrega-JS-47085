@@ -72,17 +72,29 @@ document.getElementById('premio').textContent = `Con este prestamos participas e
 let botonAgregar = document.getElementById("btnAgregar");
 botonAgregar.addEventListener("click",AgregarCliente);
 
-function AgregarCliente(){
-// Obtener los valores del formulario
-const Nombre = document.getElementById('NombreCliente').value;
-const Mail = document.getElementById('mail').value;
-const Telefono = parseInt(document.getElementById('telefono').value);
+function AgregarCliente() {
+    // Obtener los valores del formulario
+    const Nombre = document.getElementById('NombreCliente').value;
+    const Mail = document.getElementById('mail').value;
+    const Telefono = parseInt(document.getElementById('telefono').value);
 
-const clienteNuevo = new Cliente(Nombre,Mail,Telefono);
+    const clienteNuevo = new Cliente(Nombre, Mail, Telefono);
 
-Clientes.push(clienteNuevo);
-// Mostrar que se agrego cliente
-document.getElementById('clienteAgregado').textContent = `Se agrego el Cliente ${Nombre}`;
+    Clientes.push(clienteNuevo);
+    // Mostrar que se agrego cliente
+    document.getElementById('clienteAgregado').textContent = `Se agrego el Cliente ${Nombre}`;
 
-console.log(Clientes);
+    console.log(Clientes);
 }
+
+function MostrarListado() {
+    document.getElementById('clienteAgregado').textContent = "";
+    Clientes.forEach(Cliente => {
+        const nombreCliente = document.createElement("li");
+        nombreCliente.textContent = Cliente.Nombre
+        document.getElementById('ListadoDeClientes').appendChild(nombreCliente);
+    });
+}
+
+let botonMostrar = document.getElementById("btnMostrar");
+botonMostrar.addEventListener("click", MostrarListado);
